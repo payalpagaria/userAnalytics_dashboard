@@ -1,0 +1,11 @@
+.Dashboard {
+  flex: 1;
+  padding: 24px;
+  background: #f8fafc;
+}
+
+.StatsRow {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}

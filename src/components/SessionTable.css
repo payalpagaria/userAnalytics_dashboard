@@ -1,0 +1,122 @@
+
+.session-table-container {
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  overflow: hidden;
+}
+
+.session-table-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.session-table-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.session-full-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.session-full-table thead {
+  background-color: #f9fafb;
+}
+
+.session-full-table th {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.session-full-table tbody tr {
+  border-top: 1px solid #f3f4f6;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.session-full-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.session-full-table td {
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.session-id {
+  color: #2563eb;
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-count {
+  font-weight: 600;
+  color: #111827;
+}
+
+.event-details {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+}
+
+.status-badge.ended {
+  color: #6b7280;
+  background-color: #f3f4f6;
+}
+
+.status-badge.active {
+  color: #16a34a;
+  background-color: #dcfce7;
+}
+
+.view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  background: none;
+  border: none;
+  color: #374151;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.view-btn:hover {
+  background-color: #f3f4f6;
+}
+
+@media (max-width: 768px) {
+  .session-full-table {
+    font-size: 0.75rem;
+  }
+  
+  .session-full-table th,
+  .session-full-table td {
+    padding: 0.5rem 1rem;
+  }
+}

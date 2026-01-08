@@ -1,0 +1,18 @@
+/* add to any global css */
+.StatCard {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 180px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.StatTitle {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.StatValue {
+  font-size: 28px;
+  margin-top: 8px;
+}

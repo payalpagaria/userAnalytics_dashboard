@@ -12,85 +12,8 @@ body {
   color: #111827;
 }
 
-.container {
-  display: flex;
-  height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-  width: 240px;
-  background-color: #111827;
-  color: white;
-  padding: 1rem;
-}
-
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-  padding: 0 0.5rem;
-}
-
-.logo {
-  width: 40px;
-  height: 40px;
-  background-color: #2563eb;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-}
-
-.brand {
-  font-weight: 600;
-  font-size: 1.125rem;
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.nav-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: transparent;
-  border: none;
-  color: #9ca3af;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.2s;
-}
-
-.nav-btn:hover {
-  background-color: #1f2937;
-  color: white;
-}
-
-.nav-btn.active {
-  background-color: #2563eb;
-  color: white;
-}
-
-.nav-icon {
-  font-size: 1.125rem;
-}
-
-/* Main Content */
-.main-content {
-  flex: 1;
-  overflow: auto;
-}
-
-.content-wrapper {
+/* Dashboard Content */
+.dashboard-content {
   padding: 2rem;
 }
 
@@ -336,12 +259,8 @@ body {
 }
 
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-  
-  .sidebar {
-    width: 100%;
+  .dashboard-content {
+    padding: 1rem;
   }
   
   .stats-grid {

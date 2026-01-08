@@ -9,13 +9,16 @@ import "./App.css";
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="MainApp-container">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/sessions" element={<Sessions />} />
-          <Route path="/sessions/:id" element={<SessionDetail />} />
-          <Route path="/heatmap" element={<Heatmap />} />
-        </Routes>
+      <div className="app-container">
+        <Sidebar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/sessions" element={<Sessions />} />
+            <Route path="/sessions/:id" element={<SessionDetail />} />
+            <Route path="/heatmap" element={<Heatmap />} />
+          </Routes>
+        </main>
       </div>
     </BrowserRouter>
   );

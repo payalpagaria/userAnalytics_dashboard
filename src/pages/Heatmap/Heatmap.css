@@ -1,0 +1,495 @@
+.heatmap-page {
+  padding: 1.5rem 2rem;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+/* Header */
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.header-left .page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+.header-left .page-subtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.date-picker-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.date-picker-btn:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.date-icon {
+  font-size: 1rem;
+}
+
+.chevron {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-btn:hover {
+  background: #f1f5f9;
+}
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Content Layout */
+.heatmap-content {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 1.5rem;
+}
+
+/* Left Sidebar */
+.heatmap-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid #e2e8f0;
+}
+
+.card-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sparkle {
+  font-size: 1rem;
+}
+
+/* Page Selector */
+.page-selector {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.selector-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.selector-btn:hover {
+  border-color: #cbd5e1;
+}
+
+.selector-btn .page-name {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.click-badge {
+  padding: 0.25rem 0.5rem;
+  background: #e0e7ff;
+  color: #4338ca;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dropdown-item:hover {
+  background: #f1f5f9;
+}
+
+.dropdown-item.active {
+  background: #eff6ff;
+}
+
+.dropdown-item .page-name {
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.dropdown-item .click-count {
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.url-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  background: #f1f5f9;
+  border-radius: 0.375rem;
+}
+
+.url-text {
+  flex: 1;
+  font-size: 0.8125rem;
+  color: #475569;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.external-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.external-link:hover {
+  color: #2563eb;
+}
+
+/* Stats List */
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.stat-label {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 1rem;
+}
+
+/* Click Areas List */
+.click-areas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.click-area-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.area-rank {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eff6ff;
+  color: #3b82f6;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+}
+
+.area-coords {
+  flex: 1;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 0.8125rem;
+  color: #475569;
+}
+
+.area-clicks {
+  padding: 0.25rem 0.625rem;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+}
+
+/* Heatmap Visualization */
+.heatmap-visualization {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.viz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.viz-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.viz-dimensions {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  font-family: 'SF Mono', 'Menlo', monospace;
+}
+
+.browser-frame {
+  background: #f8fafc;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot.red { background: #ef4444; }
+.dot.yellow { background: #fbbf24; }
+.dot.green { background: #22c55e; }
+
+.browser-address {
+  flex: 1;
+  padding: 0.375rem 0.75rem;
+  background: white;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: 'SF Mono', 'Menlo', monospace;
+}
+
+.heatmap-canvas {
+  position: relative;
+  height: 480px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  overflow: hidden;
+}
+
+.loading-state,
+.empty-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #94a3b8;
+  font-size: 0.9375rem;
+}
+
+.heat-point {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  filter: blur(8px);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Legend */
+.heatmap-legend {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.legend-title {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.legend-items {
+  display: flex;
+  gap: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-dot.low { background: #3b82f6; }
+.legend-dot.medium { background: #f97316; }
+.legend-dot.high { background: #ef4444; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .heatmap-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .heatmap-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .heatmap-sidebar .card {
+    flex: 1;
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heatmap-page {
+    padding: 1rem;
+  }
+  
+  .heatmap-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .date-picker-btn {
+    flex: 1;
+  }
+}

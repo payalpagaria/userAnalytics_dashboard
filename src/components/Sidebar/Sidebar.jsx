@@ -1,30 +1,35 @@
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import "./Sidebar.css";
+
+const navItems = [
+  { path: "/", icon: "📈", label: "Dashboard" },
+  { path: "/sessions", icon: "📋", label: "Sessions" },
+  { path: "/heatmap", icon: "🗺️", label: "Heatmap" },
+  { path: "/analytics", icon: "📊", label: "Analytics" },
+];
 
 export default function Sidebar() {
-  return (<>
-   <nav className="Sidebar">
-     
-    
-       <aside className="sidebar">
-        <nav className="nav">
-          <button className="nav-btn active">
-            <span className="nav-icon">📈</span>
-            <Link to="/">Dashboard</Link>
-          </button>
-          <button className="nav-btn" onClick={() => navigate('/sessions')}>
-            <span className="nav-icon">📋</span>
-                 <Link to="/sessions">Sessions</Link>
+  return (
+    <aside className="sidebar">
+      <div className="sidebar-header">
+        <div className="logo">📊</div>
+        <span className="brand">CausalFunnel</span>
+      </div>
 
-          </button>
-          <button className="nav-btn">
-            <span className="nav-icon">🗺️</span>
-           <Link to="/heatmap">Heatmap</Link>
-          </button>
-          
-        </nav>
-      </aside>
-    </nav>
-  </>
-   
+      <nav className="nav">
+        {navItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) =>
+              `nav-btn ${isActive ? "active" : ""}`
+            }
+          >
+            <span className="nav-icon">{item.icon}</span>
+            <span>{item.label}</span>
+          </NavLink>
+        ))}
+      </nav>
+    </aside>
   );
 }

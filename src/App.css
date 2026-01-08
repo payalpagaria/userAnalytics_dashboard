@@ -1,7 +1,23 @@
 #root {
   width: 100%;
   height: 100%;
-  margin: 0 auto;
-  text-align: center;
+  margin: 0;
 }
 
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  overflow: auto;
+  background-color: #f9fafb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+}

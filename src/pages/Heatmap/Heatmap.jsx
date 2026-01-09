@@ -104,17 +104,11 @@ export default function Heatmap() {
           <p className="page-subtitle">Visualize user click patterns across your pages</p>
         </div>
         <div className="header-actions">
-          <button className="date-picker-btn">
-            <span className="date-icon">📅</span>
-            <span>{formatDate(weekAgo)} - {formatDate(today)}</span>
-            <span className="chevron">▾</span>
-          </button>
+          
           <button className="icon-btn" onClick={handleRefresh} title="Refresh">
             🔄
           </button>
-          <button className="export-btn">
-            <span>⬇</span> Export
-          </button>
+         
         </div>
       </header>
 

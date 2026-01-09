@@ -57,9 +57,7 @@ export default function SessionTable({ sessions, showHeader = true }) {
                 <td>
                   <div className="event-info">
                     <span className="event-count">{session.eventCount}</span>
-                    <span className="event-details">
-                      ({session.views || 0} views, {session.clicks || 0} clicks)
-                    </span>
+                 
                   </div>
                 </td>
                 <td>{formatDateTime(session.end_time)}</td>

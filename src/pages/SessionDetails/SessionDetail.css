@@ -208,6 +208,9 @@
 }
 
 .info-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
   padding: 0.75rem 0;
   border-bottom: 1px solid #f5f5f5;
 }
@@ -219,8 +222,8 @@
 
 .info-section .info-icon {
   font-size: 1rem;
-  margin-right: 0.5rem;
   opacity: 0.6;
+  margin-top: 0.125rem;
 }
 
 .event-timeline-card {

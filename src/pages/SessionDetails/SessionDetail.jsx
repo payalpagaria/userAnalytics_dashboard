@@ -153,13 +153,7 @@ export default function SessionDetail() {
               </div>
             </div>
 
-            <div className="info-section">
-              <span className="info-icon">🌐</span>
-              <div>
-                <div className="info-label">Browser</div>
-                <div className="info-value">Edge</div>
-              </div>
-            </div>
+        
           </div>
 
           {/* Event Timeline Card */}

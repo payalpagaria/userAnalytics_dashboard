@@ -406,12 +406,15 @@
 
 .heat-point {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  filter: blur(8px);
   pointer-events: none;
-  mix-blend-mode: multiply;
+  filter: blur(12px);
+  box-shadow: 
+    0 0 20px currentColor,
+    0 0 40px currentColor,
+    0 0 60px currentColor;
 }
 
 /* Legend */

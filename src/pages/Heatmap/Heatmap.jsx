@@ -3,38 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getHeatmapPages, getHeatmapPoints, setSelectedPage } from "../../features/heatmap/heatmapSlice";
 import "./Heatmap.css";
 
-// Helper to get page display name
 const getPageName = (url) => {
   if (url === "/") return "Homepage";
   return url.replace(/^\//, "").replace(/\//g, " / ");
 };
 
-// Generate mock heatmap points for visualization
-const generateMockPoints = (clickCount, seed = 0) => {
-  const points = [];
-  const clusters = Math.min(Math.ceil(clickCount / 3), 8);
-  
-  for (let c = 0; c < clusters; c++) {
-    const centerX = 100 + ((c * 137 + seed) % 600);
-    const centerY = 80 + ((c * 89 + seed) % 350);
-    const pointsInCluster = Math.ceil(clickCount / clusters);
-    
-    for (let i = 0; i < pointsInCluster && points.length < clickCount; i++) {
-      const angle = (i / pointsInCluster) * Math.PI * 2;
-      const radius = 20 + (i % 3) * 15;
-      points.push({
-        x: centerX + Math.cos(angle) * radius + (Math.sin(i * 7) * 10),
-        y: centerY + Math.sin(angle) * radius + (Math.cos(i * 11) * 10),
-        intensity: 0.3 + Math.random() * 0.7,
-      });
-    }
-  }
-  return points;
-};
-
 export default function Heatmap() {
   const dispatch = useDispatch();
-  const { pages, selectedPage, loading } = useSelector((s) => s.heatmap);
+  const { pages, selectedPage, points, loading } = useSelector((s) => s.heatmap);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -59,33 +35,61 @@ export default function Heatmap() {
     }
   };
 
-  // Generate visualization points based on click count
-  const visualPoints = useMemo(() => {
-    if (!selectedPage) return [];
-    return generateMockPoints(selectedPage.click_count * 8, selectedPage.page_url.length);
-  }, [selectedPage]);
-
-  // Calculate top click areas (mock data based on total clicks)
-  const topClickAreas = useMemo(() => {
-    if (!selectedPage) return [];
-    const areas = [];
-    const count = Math.min(5, Math.ceil(selectedPage.click_count / 3));
-    for (let i = 0; i < count; i++) {
-      areas.push({
-        rank: i + 1,
-        x: 100 + ((i * 137) % 500),
-        y: 100 + ((i * 89) % 400),
-        clicks: Math.ceil(selectedPage.click_count / (i + 1)),
-      });
+  const getCoords = (point) => {
+   
+    if (point.click_coordinates) {
+      return { x: point.click_coordinates.x, y: point.click_coordinates.y };
     }
-    return areas;
-  }, [selectedPage]);
+   
+    if (point.x !== undefined && point.y !== undefined) {
+      return { x: point.x, y: point.y };
+    }
+   
+    return { x: point.x_coord, y: point.y_coord };
+  };
+
+  const getClickCount = (point) => point.click_count || point.count || 1;
+
+  const visualPoints = useMemo(() => {
+    if (!points || points.length === 0) return [];
+    
+    
+    const maxClicks = Math.max(...points.map(p => getClickCount(p)));
+    
+    return points.map(point => {
+      const { x, y } = getCoords(point);
+      const clicks = getClickCount(point);
+      return {
+        x: Math.min((x || 0) * 0.67, 760),
+        y: Math.min((y || 0) * 0.6, 440),  
+        intensity: clicks / maxClicks,
+        clicks,
+      };
+    });
+  }, [points]);
+
+  const topClickAreas = useMemo(() => {
+    if (!points || points.length === 0) return [];
+    
+    const sorted = [...points]
+      .sort((a, b) => getClickCount(b) - getClickCount(a))
+      .slice(0, 5);
+    
+    return sorted.map((point, i) => {
+      const { x, y } = getCoords(point);
+      return {
+        rank: i + 1,
+        x: x || 0,
+        y: y || 0,
+        clicks: getClickCount(point),
+      };
+    });
+  }, [points]);
 
   const totalClicks = selectedPage?.click_count || 0;
   const clickPoints = topClickAreas.length;
   const avgPerPoint = clickPoints > 0 ? Math.round(totalClicks / clickPoints) : 0;
 
-  // Date range for display
   const today = new Date();
   const weekAgo = new Date(today);
   weekAgo.setDate(weekAgo.getDate() - 7);
@@ -221,19 +225,23 @@ export default function Heatmap() {
               ) : visualPoints.length === 0 ? (
                 <div className="empty-state">Select a page to view heatmap</div>
               ) : (
-                visualPoints.map((point, i) => (
-                  <div
-                    key={i}
-                    className="heat-point"
-                    style={{
-                      left: point.x,
-                      top: point.y,
-                      opacity: point.intensity,
-                      backgroundColor: point.intensity > 0.7 ? '#ef4444' : point.intensity > 0.4 ? '#f97316' : '#3b82f6',
-                      transform: `scale(${0.8 + point.intensity * 0.6})`,
-                    }}
-                  />
-                ))
+                visualPoints.map((point, i) => {
+                  const color = point.intensity > 0.7 ? '#ef4444' : point.intensity > 0.4 ? '#f97316' : '#3b82f6';
+                  return (
+                    <div
+                      key={i}
+                      className="heat-point"
+                      style={{
+                        left: point.x,
+                        top: point.y,
+                        opacity: 0.6 + point.intensity * 0.4,
+                        backgroundColor: color,
+                        color: color,
+                        transform: `scale(${0.9 + point.intensity * 0.8})`,
+                      }}
+                    />
+                  );
+                })
               )}
               
               {/* Legend */}

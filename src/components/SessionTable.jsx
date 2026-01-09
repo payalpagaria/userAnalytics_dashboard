@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SessionTable.css';
 
-export default function SessionTable({ sessions }) {
+export default function SessionTable({ sessions, showHeader = true }) {
   const navigate = useNavigate();
 
   const formatDuration = (seconds) => {
@@ -24,10 +24,12 @@ export default function SessionTable({ sessions }) {
 
   return (
     <div className="session-table-container">
-      <div className="session-table-header">
-        <h2>All Sessions</h2>
-      </div>
-      
+      {showHeader && (
+        <div className="session-table-header">
+          <h2>All Sessions</h2>
+        </div>
+      )}
+
       <table className="session-full-table">
         <thead>
           <tr>
@@ -43,7 +45,7 @@ export default function SessionTable({ sessions }) {
         <tbody>
           {sessions.map((session) => {
             return (
-              <tr 
+              <tr
                 key={session.session_id}
                 onClick={() => navigate(`/sessions/${session.session_id}`)}
               >
@@ -51,7 +53,7 @@ export default function SessionTable({ sessions }) {
                   <span className="session-id">{session.session_id}</span>
                 </td>
                 <td>{formatDateTime(session.start_time)}</td>
-                <td>⏱ {formatDuration(session.duration)}</td>
+                <td> {formatDuration(session.duration)}</td>
                 <td>
                   <div className="event-info">
                     <span className="event-count">{session.eventCount}</span>
@@ -67,14 +69,14 @@ export default function SessionTable({ sessions }) {
                   </span>
                 </td>
                 <td>
-                  <button 
+                  <button
                     className="view-btn"
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate(`/sessions/${session.session_id}`);
                     }}
                   >
-                    👁️ View
+                    View
                   </button>
                 </td>
               </tr>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSessions } from '../features/sessions/sessionsSlice';
+import SessionTable from '../components/SessionTable';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -17,23 +18,6 @@ const Dashboard = () => {
   const totalEvents = sessions.reduce((sum, s) => sum + s.eventCount, 0);
   const avgEvents = totalSessions > 0 ? Math.round(totalEvents / totalSessions) : 0;
   const activeSessions = sessions.filter(s => s.status === 'Active').length;
-
-  const formatDuration = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}m ${secs}s`;
-  };
-
-  const formatDateTime = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
-    });
-  };
 
   const handleViewAll = () => {
     navigate('/sessions');
@@ -57,7 +41,6 @@ const Dashboard = () => {
             </div>
             <div className="stat-icon blue">👥</div>
           </div>
-          <p className="stat-change positive">↗ 12.5% vs last week</p>
         </div>
 
         <div className="stat-card">
@@ -68,7 +51,6 @@ const Dashboard = () => {
             </div>
             <div className="stat-icon purple">📊</div>
           </div>
-          <p className="stat-change positive">↗ 8.2% vs last week</p>
         </div>
 
         <div className="stat-card">
@@ -90,7 +72,6 @@ const Dashboard = () => {
             </div>
             <div className="stat-icon orange">📈</div>
           </div>
-          <p className="stat-change positive">↗ 5.8% vs last week</p>
         </div>
       </div>
 
@@ -101,57 +82,7 @@ const Dashboard = () => {
           <button className="view-all-btn" onClick={handleViewAll}>View all →</button>
         </div>
         
-        <table className="sessions-table">
-          <thead>
-            <tr>
-              <th>Session ID</th>
-              <th>Start Time</th>
-              <th>Duration</th>
-              <th>Events</th>
-              <th>Last Activity</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sessions.slice(0, 5).map((session) => {
-              return (
-                <tr key={session.session_id}>
-                  <td>
-                    <span className="session-id">{session.session_id}</span>
-                  </td>
-                  <td>{formatDateTime(session.start_time)}</td>
-                  <td>⏱ {formatDuration(session.duration)}</td>
-                  <td>
-                    <div className="event-info">
-                      <span className="event-count">{session.eventCount}</span>
-                      <span className="event-details">
-                        ({session.views || 0} views, {session.clicks || 0} clicks)
-                      </span>
-                    </div>
-                  </td>
-                  <td>{formatDateTime(session.end_time)}</td>
-                  <td>
-                    <span className={`status-badge ${session.status.toLowerCase()}`}>
-                      {session.status}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="actions">
-                      <button 
-                        className="view-btn"
-                        onClick={() => navigate(`/sessions/${session.session_id}`)}
-                      >
-                        👁️ View
-                      </button>
-                      <button className="more-btn">⋯</button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <SessionTable sessions={sessions.slice(0, 5)} showHeader={false} />
       </div>
     </div>
   );
